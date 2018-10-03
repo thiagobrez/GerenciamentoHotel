@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejb;
+package ejb.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,28 +16,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author thiagobrezinski
  */
 @Entity
-@Table(name = "FUNCIONARIO")
+@Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f")
-	, @NamedQuery(name = "Funcionario.findById", query = "SELECT f FROM Funcionario f WHERE f.id = :id")
-	, @NamedQuery(name = "Funcionario.findByNome", query = "SELECT f FROM Funcionario f WHERE f.nome = :nome")
-	, @NamedQuery(name = "Funcionario.findByCpf", query = "SELECT f FROM Funcionario f WHERE f.cpf = :cpf")
-	, @NamedQuery(name = "Funcionario.findByEndereco", query = "SELECT f FROM Funcionario f WHERE f.endereco = :endereco")
-	, @NamedQuery(name = "Funcionario.findByTelefone", query = "SELECT f FROM Funcionario f WHERE f.telefone = :telefone")
-	, @NamedQuery(name = "Funcionario.findByUsername", query = "SELECT f FROM Funcionario f WHERE f.username = :username")
-	, @NamedQuery(name = "Funcionario.findBySenha", query = "SELECT f FROM Funcionario f WHERE f.senha = :senha")})
-public class Funcionario implements Serializable {
+	@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+	, @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
+	, @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
+	, @NamedQuery(name = "Usuario.findByCpf", query = "SELECT u FROM Usuario u WHERE u.cpf = :cpf")
+	, @NamedQuery(name = "Usuario.findByEndereco", query = "SELECT u FROM Usuario u WHERE u.endereco = :endereco")
+	, @NamedQuery(name = "Usuario.findByTelefone", query = "SELECT u FROM Usuario u WHERE u.telefone = :telefone")})
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -59,30 +61,20 @@ public class Funcionario implements Serializable {
 	@Size(max = 11)
     @Column(name = "TELEFONE")
 	private String telefone;
-	@Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "USERNAME")
-	private String username;
-	@Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "SENHA")
-	private String senha;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+	private Collection<Estadia> estadiaCollection;
 
-	public Funcionario() {
+	public Usuario() {
 	}
 
-	public Funcionario(Integer id) {
+	public Usuario(Integer id) {
 		this.id = id;
 	}
 
-	public Funcionario(Integer id, String nome, String cpf, String username, String senha) {
+	public Usuario(Integer id, String nome, String cpf) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.username = username;
-		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -125,20 +117,13 @@ public class Funcionario implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public String getUsername() {
-		return username;
+	@XmlTransient
+	public Collection<Estadia> getEstadiaCollection() {
+		return estadiaCollection;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setEstadiaCollection(Collection<Estadia> estadiaCollection) {
+		this.estadiaCollection = estadiaCollection;
 	}
 
 	@Override
@@ -151,10 +136,10 @@ public class Funcionario implements Serializable {
 	@Override
 	public boolean equals(Object object) {
 		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof Funcionario)) {
+		if (!(object instanceof Usuario)) {
 			return false;
 		}
-		Funcionario other = (Funcionario) object;
+		Usuario other = (Usuario) object;
 		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}
@@ -163,7 +148,7 @@ public class Funcionario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ejb.Funcionario[ id=" + id + " ]";
+		return "ejb.Usuario[ id=" + id + " ]";
 	}
 	
 }
