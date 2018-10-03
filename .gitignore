@@ -10,3 +10,6 @@ nbdist/
 # Visual Paradigm
 
 *.vpp~*
+/GerenciamentoHotel/nbproject/private/
+/GerenciamentoHotel/GerenciamentoHotel-war/nbproject/private/
+/GerenciamentoHotel/GerenciamentoHotel-ejb/nbproject/private/
