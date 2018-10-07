@@ -11,6 +11,11 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.Estadia;
+import ejb.entidades.Usuario;
+import ejb.entidades.Quarto;
+import java.math.BigDecimal;
+import javax.ejb.EJB;
 
 /**
  *
@@ -20,6 +25,9 @@ import javax.persistence.Query;
 @LocalBean
 public class EstadiaSessionBean {
 
+	@EJB
+	private UsuarioSessionBean usuarioSessionBean;
+
 	@PersistenceContext(unitName = "GerenciamentoHotel-ejbPU")
 	private EntityManager em;
 
@@ -27,11 +35,38 @@ public class EstadiaSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.Estadia> getEstadias() {
+	public List<Estadia> getEstadias() {
         Query query = em.createNamedQuery("Estadia.findAll");
         return query.getResultList();
     }
 	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
+	public void checkIn(
+			String nome,
+			String cpf,
+			String endereco,
+			String telefone,
+			Quarto quarto,
+			int senha,
+			int diarias
+	) {		
+		Usuario usuario = usuarioSessionBean.findUsuarioByCpf(cpf);
+		if(usuario == null) {
+			usuario = usuarioSessionBean.createUsuario(nome, cpf, endereco, telefone);
+		} else {
+			usuario = usuarioSessionBean.updateUsuario(nome, cpf, endereco, telefone);
+		}
+		
+		BigDecimal faturaInicial = quarto.getValordiaria().multiply(BigDecimal.valueOf(diarias));
+		
+		Estadia estadia = new Estadia(
+				usuario,
+				quarto,
+				senha,
+				faturaInicial,
+				diarias,
+				0
+		);
+		
+		persist(estadia);
+	}
 }

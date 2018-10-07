@@ -76,6 +76,22 @@ public class Estadia implements Serializable {
 		this.diarias = diarias;
 	}
 
+	public Estadia(
+			Usuario usuario,
+			Quarto quarto,
+			int senha,
+			BigDecimal fatura,
+			int diarias,
+			int checkout
+	) {
+		this.usuario = usuario;
+		this.quarto = quarto;
+		this.senha = senha;
+		this.fatura = fatura;
+		this.diarias = diarias;
+		this.checkout = checkout;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

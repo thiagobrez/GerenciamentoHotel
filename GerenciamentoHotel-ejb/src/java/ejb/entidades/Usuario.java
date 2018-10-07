@@ -77,6 +77,18 @@ public class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
+	public Usuario(
+			String nome,
+			String cpf,
+			String endereco,
+			String telefone
+	) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.endereco = endereco;
+		this.telefone = telefone;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
