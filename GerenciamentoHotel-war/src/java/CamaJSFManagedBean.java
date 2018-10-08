@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import ejb.entidades.Cama;
 import ejb.sessionBeans.CamaSessionBean;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -26,6 +28,12 @@ public class CamaJSFManagedBean {
 	public CamaJSFManagedBean() {
 	}
 	
-	
+	public List<Cama> getCamas() {
+		return camaSessionBean.getCamas();
+	}
+
+	public Cama getCamaById(int id) {
+		return camaSessionBean.getCamaById(id);
+	}
 	
 }

@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+import ejb.entidades.QuartoCama;
+import ejb.sessionBeans.QuartoCamaSessionBean;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -15,10 +19,20 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class QuartoCamaJSFManagedBean {
 
+	@EJB
+	private QuartoCamaSessionBean quartoCamaSessionBean;
+
 	/**
 	 * Creates a new instance of QuartoCamaJSFManagedBean
 	 */
 	public QuartoCamaJSFManagedBean() {
 	}
 	
+	public List<QuartoCama> getQuartoCamas() {
+		return quartoCamaSessionBean.getQuartoCamas();
+	}
+	
+	public QuartoCama createQuartoCama(int idQuarto, int idCama) {
+		return quartoCamaSessionBean.createQuartoCama(idQuarto, idCama);
+	}
 }
