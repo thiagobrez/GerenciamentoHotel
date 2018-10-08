@@ -30,7 +30,7 @@ public class FuncionarioJSFManagedBean {
 	 */
 	public FuncionarioJSFManagedBean() {
 	}
-
+	
 	public String getUsername() {
 		return username;
 	}
