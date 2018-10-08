@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.QuartoCama;
 
 /**
  *
@@ -27,11 +28,15 @@ public class QuartoCamaSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.QuartoCama> getQuartoCamas() {
+	public List<QuartoCama> getQuartoCamas() {
         Query query = em.createNamedQuery("QuartoCama.findAll");
         return query.getResultList();
     }
 	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
+	public QuartoCama createQuartoCama(int idQuarto, int idCama) {
+		QuartoCama quartoCama = new QuartoCama(idQuarto, idCama);
+		persist(quartoCama);
+		
+		return quartoCama;
+	}
 }

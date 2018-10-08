@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.EstadiaServicos;
 
 /**
  *
@@ -27,11 +28,13 @@ public class EstadiaServicosSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.EstadiaServicos> getEstadiaServicos() {
+	public List<EstadiaServicos> getEstadiaServicos() {
         Query query = em.createNamedQuery("EstadiaServicos.findAll");
         return query.getResultList();
     }
 	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
+	public void createEstadiaServico(int idEstadia, int idServico) {
+		EstadiaServicos estadiaServico = new EstadiaServicos(idEstadia, idServico);
+		persist(estadiaServico);
+	}
 }

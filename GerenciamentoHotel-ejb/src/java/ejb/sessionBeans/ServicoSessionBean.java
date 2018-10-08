@@ -11,6 +11,8 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.Servico;
+import java.math.BigDecimal;
 
 /**
  *
@@ -27,11 +29,31 @@ public class ServicoSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.Servico> getServicos() {
+	public List<Servico> getServicos() {
         Query query = em.createNamedQuery("Servico.findAll");
         return query.getResultList();
     }
+
+	public Servico findServicoByNome(String nome) {
+		for(Servico servico : getServicos()) {
+			if(servico.getNome().equals(nome)) return servico;
+		}
+		
+		return null;
+	}
 	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
+	public Servico findServicoById(int id) {
+		for(Servico servico : getServicos()) {
+			if(servico.getId().equals(id)) return servico;
+		}
+		
+		return null;
+	}
+	
+	public Servico createServico(String nome, String descricao, BigDecimal valor) {
+		Servico servico = new Servico(nome, descricao, valor);
+		persist(servico);
+		
+		return findServicoByNome(nome);
+	}
 }

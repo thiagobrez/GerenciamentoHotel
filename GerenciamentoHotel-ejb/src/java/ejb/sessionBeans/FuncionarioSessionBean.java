@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.Funcionario;
 
 /**
  *
@@ -27,11 +28,20 @@ public class FuncionarioSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.Funcionario> getFuncionarios() {
+	public Funcionario login(int username, int senha) {
+		List<Funcionario> funcionarios = getFuncionarios();
+		for(Funcionario funcionario : funcionarios) {
+			if(funcionario.getUsername().equals(username) &&
+					funcionario.getSenha().equals(senha)) {
+				return funcionario;
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<Funcionario> getFuncionarios() {
         Query query = em.createNamedQuery("Funcionario.findAll");
         return query.getResultList();
     }
-	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
 }

@@ -29,7 +29,7 @@ public class UsuarioSessionBean {
 	public void persist(Object object) {
 		em.persist(object);
 	}
-
+	
 	public List<Usuario> getUsuarios() {
         Query query = em.createNamedQuery("Usuario.findAll");
         return query.getResultList();

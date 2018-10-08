@@ -7,6 +7,7 @@ package ejb.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -66,6 +67,9 @@ public class Quarto implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "quarto")
 	private Collection<Estadia> estadiaCollection;
 
+	private ArrayList<Cama> camas;
+	private ArrayList<String> adicionais;
+	
 	public Quarto() {
 	}
 
@@ -80,6 +84,26 @@ public class Quarto implements Serializable {
 		this.ocupado = ocupado;
 	}
 
+	public Quarto(
+			int numero,
+			BigDecimal valorDiaria,
+			String tipo,
+			String ocupado
+	) {
+		this.numero = numero;
+		this.valordiaria = valorDiaria;
+		this.tipo = tipo;
+		this.ocupado = ocupado;
+	}
+
+	public ArrayList<Cama> getCamas() {
+		return camas;
+	}
+
+	public ArrayList<String> getAdicionais() {
+		return adicionais;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

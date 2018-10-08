@@ -11,6 +11,7 @@ import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import ejb.entidades.QuartoAdicionais;
 
 /**
  *
@@ -27,11 +28,15 @@ public class QuartoAdicionaisSessionBean {
 		em.persist(object);
 	}
 
-	public List<ejb.entidades.QuartoAdicionais> getQuartoAdicionais() {
+	public List<QuartoAdicionais> getQuartoAdicionais() {
         Query query = em.createNamedQuery("QuartoAdicionais.findAll");
         return query.getResultList();
     }
 	
-	// Add business logic below. (Right-click in editor and choose
-	// "Insert Code > Add Business Method")
+	public QuartoAdicionais createQuartoAdicional(int idQuarto, String adicional) {
+		QuartoAdicionais quartoAdicionais = new QuartoAdicionais(idQuarto, adicional);
+		persist(quartoAdicionais);
+		
+		return quartoAdicionais;
+	}
 }

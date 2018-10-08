@@ -65,6 +65,12 @@ public class Servico implements Serializable {
 		this.nome = nome;
 	}
 
+	public Servico(String nome, String descricao, BigDecimal valor) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.valor = valor;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
