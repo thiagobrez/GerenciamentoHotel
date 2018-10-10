@@ -204,15 +204,22 @@ public class EstadiaJSFManagedBean {
                 this.novaDiarias,
                 this.novoStatus
         );
+        this.novoNome = "";
+        this.novoCpf = "";
+        this.novoEndereco = "";
+        this.novaSenha = 0;
+        this.novoStatus = "";
+        this.novoTelefone = "";
+        this.novoQuarto = 0;
+        this.novaDiarias = 0;
     }
 
     public void updateEstadia(Estadia estadia) {
         estadiaSessionBean.updateEstadia(estadia);
     }
 
-    public String solicitarServico() {
-        return "menuSolicitarServico?faces-redirect=true";
-//        estadiaSessionBean.solicitarServico(this.numeroQuarto, this.servico);
+    public void solicitarServico() {
+        estadiaSessionBean.solicitarServico(this.estadia.getId(), this.servico);
     }
 
     public String login() throws IOException {
