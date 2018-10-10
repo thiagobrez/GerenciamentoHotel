@@ -45,45 +45,13 @@ public class QuartoSessionBean {
 
 	public List<Quarto> getQuartos() {
         Query query = em.createNamedQuery("Quarto.findAll");
-		
-        List<Quarto> quartos = query.getResultList();
-		List<QuartoCama> quartoCamas = quartoCamaSessionBean.getQuartoCamas();
-		List<QuartoAdicionais> quartoAdicionais = quartoAdicionaisSessionBean.getQuartoAdicionais();
-		
-		for(Quarto quarto : quartos) {
-			for(QuartoCama quartoCama : quartoCamas) {
-				if(quarto.getId() == quartoCama.getQuartoCamaPK().getIdQuarto())
-					quarto.getCamas().add(camaSessionBean.getCamaById(quartoCama.getQuartoCamaPK().getIdCama()));
-			}
-		}
-		
-		for(Quarto quarto : quartos) {
-			for(QuartoAdicionais quartoAdicional : quartoAdicionais) {
-				if(quarto.getId() == quartoAdicional.getQuartoAdicionaisPK().getIdQuarto())
-					quarto.getAdicionais().add(quartoAdicional.getQuartoAdicionaisPK().getAdicional());
-			}
-		}
-		
-		return quartos;
+        return query.getResultList();
     }
 	
 	public Quarto getQuartoByNumero(int numero) {
         Query query = em.createNamedQuery("Quarto.findByNumero");
 		query.setParameter("numero", numero);
-        Quarto quarto = ((Quarto) query.getResultList().get(0));
-		
-		for(QuartoCama quartoCama : quartoCamaSessionBean.getQuartoCamas()) {
-			if(quarto.getId() == quartoCama.getQuartoCamaPK().getIdQuarto())
-				quarto.getCamas().add(camaSessionBean.getCamaById(quartoCama.getQuartoCamaPK().getIdCama()));
-		}
-		
-		for (QuartoAdicionais quartoAdicional : quartoAdicionaisSessionBean.getQuartoAdicionais()) {
-			if (quarto.getId() == quartoAdicional.getQuartoAdicionaisPK().getIdQuarto()) {
-				quarto.getAdicionais().add(quartoAdicional.getQuartoAdicionaisPK().getAdicional());
-			}
-		}
-		
-		return quarto;
+        return (Quarto) query.getSingleResult();
 	}
 	
 	public Quarto createQuarto(

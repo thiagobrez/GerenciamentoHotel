@@ -24,7 +24,7 @@ public class EstadiaJSFManagedBean {
     @EJB
     private EstadiaSessionBean estadiaSessionBean;
 
-    private String username;
+	private int numeroQuarto;
     private String senha;
     private Quarto selectedQuarto;
     private String nome;
@@ -33,6 +33,19 @@ public class EstadiaJSFManagedBean {
     private String telefone;
     private String fatura;
 
+	/**
+     * Creates a new instance of EstadiaJSFManagedBean
+     */
+    public EstadiaJSFManagedBean() {}
+
+	public int getNumeroQuarto() {
+		return numeroQuarto;
+	}
+
+	public void setNumeroQuarto(int numeroQuarto) {
+		this.numeroQuarto = numeroQuarto;
+	}
+	
     public String getFatura() {
         return fatura;
     }
@@ -40,24 +53,17 @@ public class EstadiaJSFManagedBean {
     public void setFatura(String fatura) {
         this.fatura = fatura;
     }
-    private String senhaCheckin;
 
-    /**
-     * Creates a new instance of EstadiaJSFManagedBean
-     */
-    public EstadiaJSFManagedBean() {
+	public String getSenha() {
+        return senha;
     }
 
-    public Estadia login(int numeroQuarto, int senha) {
-        return estadiaSessionBean.login(numeroQuarto, senha);
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public List<Estadia> getEstadias() {
         return estadiaSessionBean.getEstadias();
-    }
-
-    public Estadia getEstadiaById(int id) {
-        return estadiaSessionBean.getEstadiaById(id);
     }
 
     public Quarto getSelectedQuarto() {
@@ -129,32 +135,12 @@ public class EstadiaJSFManagedBean {
     public void solicitarServico(int idEstadia, Servico servico) {
         estadiaSessionBean.solicitarServico(idEstadia, servico);
     }
-
-    public String getUsername() {
-        return username;
+	
+	public Estadia login(int numeroQuarto, int senha) {
+        return estadiaSessionBean.login(numeroQuarto, senha);
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Estadia login() {
-        return estadiaSessionBean.login(this.username, this.senha);
-    }
-
-    public void realizarCheckin() {
-        return estadiaSessionBean.realizarCheckin(this.nome, this.cpf, this.endereco, this.telefone, this.selectedQuarto);
-    }
-
-    public void realizarCheckout() {
-        return estadiaSessionBean.realizarCheckout(this.selectedQuarto);
+	
+    public Estadia getEstadiaById(int id) {
+        return estadiaSessionBean.getEstadiaById(id);
     }
 }
