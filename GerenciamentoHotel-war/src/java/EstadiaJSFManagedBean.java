@@ -36,6 +36,79 @@ public class EstadiaJSFManagedBean {
     private String fatura;
     private Servico servico;
 
+	private String novoNome;
+	private String novoCpf;
+	private String novoEndereco;
+	private String novoTelefone;
+	private int novaDiarias;
+	private int novaSenha;
+	private String novoStatus;
+	private int novoQuarto;
+
+	public int getNovoQuarto() {
+		return novoQuarto;
+	}
+
+	public void setNovoQuarto(int novoQuarto) {
+		this.novoQuarto = novoQuarto;
+	}
+
+	public String getNovoNome() {
+		return novoNome;
+	}
+
+	public void setNovoNome(String novoNome) {
+		this.novoNome = novoNome;
+	}
+
+	public String getNovoCpf() {
+		return novoCpf;
+	}
+
+	public void setNovoCpf(String novoCpf) {
+		this.novoCpf = novoCpf;
+	}
+
+	public String getNovoEndereco() {
+		return novoEndereco;
+	}
+
+	public void setNovoEndereco(String novoEndereco) {
+		this.novoEndereco = novoEndereco;
+	}
+
+	public String getNovoTelefone() {
+		return novoTelefone;
+	}
+
+	public void setNovoTelefone(String novoTelefone) {
+		this.novoTelefone = novoTelefone;
+	}
+
+	public int getNovaDiarias() {
+		return novaDiarias;
+	}
+
+	public void setNovaDiarias(int novaDiarias) {
+		this.novaDiarias = novaDiarias;
+	}
+
+	public int getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(int novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getNovoStatus() {
+		return novoStatus;
+	}
+
+	public void setNovoStatus(String novoStatus) {
+		this.novoStatus = novoStatus;
+	}
+	
     /**
      * Creates a new instance of EstadiaJSFManagedBean
      */
@@ -118,25 +191,16 @@ public class EstadiaJSFManagedBean {
         return estadiaSessionBean.getEstadias();
     }
 
-    public void createEstadia(
-            String nome,
-            String cpf,
-            String endereco,
-            String telefone,
-            Quarto quarto,
-            int senha,
-            int diarias,
-            String status
-    ) {
+    public void createEstadia() {
         estadiaSessionBean.createEstadia(
-                nome,
-                cpf,
-                endereco,
-                telefone,
-                quarto,
-                senha,
-                diarias,
-                status
+                this.novoNome,
+                this.novoCpf,
+                this.novoEndereco,
+                this.novoTelefone,
+                this.novoQuarto,
+                this.novaSenha,
+                this.novaDiarias,
+                this.novoStatus
         );
     }
 

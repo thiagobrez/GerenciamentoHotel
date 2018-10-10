@@ -8,119 +8,72 @@
         <title>Hotel Control</title>
     </h:head>
     <h:body>
+        <p:dataTable var="quarto" value="#{quartoJSFManagedBean.quartos}">
+            <p:column headerText="Numero">
+                <h:outputText value="#{quarto.numero}" />
+            </p:column>
 
-        <!--layout="grid"-->
+            <p:column headerText="Valor da diaria">
+                <h:outputText value="#{quarto.valordiaria}" />
+            </p:column>
 
-        <p:dataGrid var="quarto"
-                    value="#{QuartoJSFManagedBean.quartos}"
-                    columns="3"
-                    rows="6"
-                    paginator="true"
-                    id="quartos"
-                    paginatorTemplate="{CurrentPageReport}
-                    {FirstPageLink}
-                    {PreviousPageLink}
-                    {PageLinks}
-                    {NextPageLink}
-                    {LastPageLink}
-                    {RowsPerPageDropdown}"
-                    rowsPerPageTemplate="6">
+            <p:column headerText="Status">
+                <h:outputText value="#{quarto.ocupado}" />
+            </p:column>
 
-            <f:facet name="header">
-                Quartos cadastrados
-            </f:facet>
+            <p:column headerText="Tipo">
+                <h:outputText value="#{quarto.tipo}" />
+            </p:column>
+        </p:dataTable>
 
-            <p:panel header="#{quarto.numero}" style="text-align:center">
-                <h:panelGrid columns="1" style="width:100%">
+        <br></br>
+        <br></br>
+        
+        <p:panel id="checkinPanel" header="Fazer checkin" style="margin-bottom:20px">
+               <h:panelGrid columns="1" cellpadding="10">
+                   <h:form id="formCadastrarQuarto">
 
-                    <h:outputText value="#{quarto.ocupado}" />
+<!--                       String nome,
+			String cpf,
+			String endereco,
+			String telefone,
+			Quarto quarto,
+			int senha,
+			int diarias,
+			String status-->
+                       
+                       
+                       <h:outputLabel for="nome" value="Nome:" style="font-weight:bold" />
+                       <p:inputText id="nome" value="#{estadiaJSFManagedBean.novoNome}"/>
+                       
+                       <h:outputLabel for="cpf" value="CPF:" style="font-weight:bold" />
+                       <p:inputText id="cpf" value="#{estadiaJSFManagedBean.novoCpf}"/>
+                       
+                       <h:outputLabel for="endereco" value="Endereco" style="font-weight:bold" />
+                       <p:inputText id="endereco" value="#{estadiaJSFManagedBean.novoEndereco}"/>
+                       
+                       <h:outputLabel for="telefone" value="Telefone" style="font-weight:bold" />
+                       <p:inputText id="telefone" value="#{estadiaJSFManagedBean.novoTelefone}"/>
+                       
+                       <h:outputLabel for="quarto" value="Numero do quarto:" style="font-weight:bold" />
+                       <p:inputText id="quartp" value="#{estadiaJSFManagedBean.novoQuarto}"/>
+                       
+                       <h:outputLabel for="senha" value="Senha:" style="font-weight:bold" />
+                       <p:inputText id="senha" value="#{estadiaJSFManagedBean.novaSenha}"/>
+                       
+                       <h:outputLabel for="diarias" value="Numero de diarias:" style="font-weight:bold" />
+                       <p:inputText id="diarias" value="#{estadiaJSFManagedBean.novaDiarias}"/>
+                       
+                       <h:outputLabel for="status" value="Status:" style="font-weight:bold" />
+                       <p:inputText id="status" value="#{estadiaJSFManagedBean.novoStatus}"/>
+                       
+                       <p:commandButton value="Cadastrar Estadia" id="cadastrarQuarto"
+                                        update="cadastrarEstadia" actionListener="#{estadiaJSFManagedBean.createEstadia}" />
 
-                    <p:commandLink update=":form:checkin"
-                                   oncomplete="PF('checkinDialog').show()" title="Checkin">
-                        <f:setPropertyActionListener value="#{quarto}"
-                                                     target="#{EstadiaJSFManagedBean.selectedQuarto}" />
-                    </p:commandLink>
-
-                    <p:commandLink update=":form:checkout"
-                                   oncomplete="PF('checkoutDialog').show()" title="Checkout">
-                        <f:setPropertyActionListener value="#{quarto}"
-                                                     target="#{EstadiaJSFManagedBean.selectedQuarto}" />
-                    </p:commandLink>
-
-                </h:panelGrid>
-            </p:panel>
-        </p:dataGrid>
-
-        <p:dialog header="Checkin" widgetVar="checkinDialog" modal="true"
-                  showEffect="fade" hideEffect="fade" resizable="false">
-            <h:form>
-                <p:outputPanel id="checkinPanel" style="text-align:center;">
-                    <p:panelGrid  columns="2"
-                                  rendered="#{not empty EstadiaJSFManagedBean.selectedQuarto}"
-                                  columnClasses="label,value">
-
-                        <h:outputText value="Nome: " />
-                        <p:inputText id="nomeHospede" value="#{EstadiaJSFManagedBean.nome}" />
-
-                        <h:outputText value="CPF: " />
-                        <p:inputText id="cpfHospede" value="#{EstadiaJSFManagedBean.cpf}"/>
-
-                        <h:outputText value="Endereco: " />
-                        <p:inputText id="enderecoHospede" value="#{EstadiaJSFManagedBean.endereco}"/>
-
-                        <h:outputText value="Telefone: " />
-                        <p:inputText id="telefoneHospede" value="#{EstadiaJSFManagedBean.telefone}"/>
-
-                        <p:commandButton value="Realizar Checkin" id="realizarCheckin"
-                                         actionListener="#{EstadiaJSFManagedBean.realizarCheckin}" />
-
-                </p:panelGrid>
-            </p:outputPanel>
-        </h:form>
-    </p:dialog>
-
-    <p:dialog header="Checkout" widgetVar="checkoutDialog" modal="true"
-              showEffect="fade" hideEffect="fade" resizable="false">
-
-        <p:outputPanel id="checkoutPanel" style="text-align:center;">
-            <p:panelGrid  columns="1" rendered="#{not empty EstadiaJSFManagedBean.selectedQuarto}" columnClasses="label">
-
-                <h:outputText value="Fatura a ser·fechada no valor de #{EstadiaJSFManagedBean.fatura} " />
-
-                <p:commandButton value="Realizar Checkout" id="realizarCheckout"
-                                 update="realizarCheckout" actionListener="#{EstadiaJSFManagedBean.realizarCheckout}" />
-
-            </p:panelGrid>
-        </p:outputPanel>
-    </p:dialog>
-
-    <!--
-<p:dialog header="Sucesso" widgetVar="sucessCheckinDialog" modal="true"
-          showEffect="fade" hideEffect="fade" resizable="false">
-
-    <p:outputPanel id="sucessCheckinPanel" style="text-align:center;">
-        <p:panelGrid  columns="1" rendered="#{not empty algumaClasse.selectedQuarto}" columnClasses="label">
-
-            <h:outputText value="Sucesso ao realizar o checkin" />
-            <h:outputText value="Sua senha para acessar o sistema é #{EstadiaJSFManagedBean.senhaCheckin}" />
-
-        </p:panelGrid>
-    </p:outputPanel>
-</p:dialog>
-
-<p:dialog header="Sucesso" widgetVar="sucessCheckoutDialog" modal="true"
-          showEffect="fade" hideEffect="fade" resizable="false">
-
-    <p:outputPanel id="sucessCheckoutPanel" style="text-align:center;">
-        <p:panelGrid  columns="1" rendered="#{not empty algumaClasse.selectedQuarto}" columnClasses="label">
-
-            <h:outputText value="Sucesso ao realizar o checkout" />
-
-        </p:panelGrid>
-    </p:outputPanel>
-</p:dialog>
-    -->
-
+                   </h:form>
+               </h:panelGrid>
+        </p:panel>
+        
     <p:panel id="cadastrarQuartoPanel" header="Cadastrar Quarto" style="margin-bottom:20px">
         <h:panelGrid columns="1" cellpadding="10">
             <h:form id="formCadastrarQuarto">

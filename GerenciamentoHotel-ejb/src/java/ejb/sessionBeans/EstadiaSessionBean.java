@@ -74,7 +74,7 @@ public class EstadiaSessionBean {
 			String cpf,
 			String endereco,
 			String telefone,
-			Quarto quarto,
+			int numeroQuarto,
 			int senha,
 			int diarias,
 			String status
@@ -85,6 +85,8 @@ public class EstadiaSessionBean {
 		} else {
 			usuario = usuarioSessionBean.updateUsuario(nome, cpf, endereco, telefone);
 		}
+		
+		Quarto quarto = quartoSessionBean.getQuartoByNumero(numeroQuarto);
 		
 		BigDecimal faturaInicial = quarto.getValordiaria().multiply(BigDecimal.valueOf(diarias));
 		
