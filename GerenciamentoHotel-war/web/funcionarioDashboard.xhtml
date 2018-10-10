@@ -54,8 +54,10 @@
                        <h:outputLabel for="diarias" value="Numero de diarias:" style="font-weight:bold" />
                        <p:inputText id="diarias" value="#{estadiaJSFManagedBean.novaDiarias}"/>
                        
-                       <h:outputLabel for="status" value="Status:" style="font-weight:bold" />
-                       <p:inputText id="status" value="#{estadiaJSFManagedBean.novoStatus}"/>
+                       <h:outputLabel for="listaStatus" value="Status:" style="font-weight:bold" />
+                       <p:selectOneMenu id="listaStatus" value="#{estadiaJSFManagedBean.novoStatus}" style="width:125px">
+                           <f:selectItems value="#{estadiaJSFManagedBean.listaStatus}" />
+                       </p:selectOneMenu>
                        
                        <p:commandButton value="Cadastrar Estadia" id="cadastrarEstadia"
                                         update="cadastrarEstadia" actionListener="#{estadiaJSFManagedBean.createEstadia}" />
