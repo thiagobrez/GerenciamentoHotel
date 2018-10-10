@@ -24,28 +24,30 @@ public class EstadiaJSFManagedBean {
     @EJB
     private EstadiaSessionBean estadiaSessionBean;
 
-	private int numeroQuarto;
-    private String senha;
+    private int numeroQuarto;
+    private int senha;
     private Quarto selectedQuarto;
     private String nome;
     private String cpf;
     private String endereco;
     private String telefone;
     private String fatura;
+    private Servico servico;
 
-	/**
+    /**
      * Creates a new instance of EstadiaJSFManagedBean
      */
-    public EstadiaJSFManagedBean() {}
+    public EstadiaJSFManagedBean() {
+    }
 
-	public int getNumeroQuarto() {
-		return numeroQuarto;
-	}
+    public int getNumeroQuarto() {
+        return numeroQuarto;
+    }
 
-	public void setNumeroQuarto(int numeroQuarto) {
-		this.numeroQuarto = numeroQuarto;
-	}
-	
+    public void setNumeroQuarto(int numeroQuarto) {
+        this.numeroQuarto = numeroQuarto;
+    }
+
     public String getFatura() {
         return fatura;
     }
@@ -54,16 +56,12 @@ public class EstadiaJSFManagedBean {
         this.fatura = fatura;
     }
 
-	public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(int senha) {
         this.senha = senha;
-    }
-
-    public List<Estadia> getEstadias() {
-        return estadiaSessionBean.getEstadias();
     }
 
     public Quarto getSelectedQuarto() {
@@ -80,6 +78,14 @@ public class EstadiaJSFManagedBean {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public String getCpf() {
@@ -104,6 +110,10 @@ public class EstadiaJSFManagedBean {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Estadia> getEstadias() {
+        return estadiaSessionBean.getEstadias();
     }
 
     public void createEstadia(
@@ -132,15 +142,27 @@ public class EstadiaJSFManagedBean {
         estadiaSessionBean.updateEstadia(estadia);
     }
 
-    public void solicitarServico(int idEstadia, Servico servico) {
-        estadiaSessionBean.solicitarServico(idEstadia, servico);
+    public void solicitarServico() {
+        estadiaSessionBean.solicitarServico(this.numeroQuarto, this.servico);
     }
-	
-	public Estadia login(int numeroQuarto, int senha) {
-        return estadiaSessionBean.login(numeroQuarto, senha);
+
+    public Estadia login() {
+        return estadiaSessionBean.login(this.numeroQuarto, this.senha);
     }
-	
+
+    public void deslogar() {
+        this.numeroQuarto = 0;
+        this.senha = 0;
+        this.selectedQuarto = null;
+        this.nome = "";
+        this.cpf = "";
+        this.endereco = "";
+        this.fatura = "";
+        this.telefone = "";
+    }
+
     public Estadia getEstadiaById(int id) {
         return estadiaSessionBean.getEstadiaById(id);
     }
+
 }

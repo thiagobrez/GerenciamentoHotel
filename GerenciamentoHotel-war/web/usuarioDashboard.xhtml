@@ -9,11 +9,10 @@
     </h:head>
     <h:body>
 
-        <p:commandButton value="Contratar Servico" id="contratarServico"  actionListener="#{EstadiaJSFManagedBean.visualizarSolicitarServico}" />
-        <p:commandButton value="Solicitar Limpeza" id="solicitarLimpeza" actionListener="#{EstadiaJSFManagedBean.solicitarLimpeza}" />
-        <p:commandButton value="Consultar Fatura" id="consultarFatura"  actionListener="#{EstadiaJSFManagedBean.vizualizarFatura}" />
+        <p:commandButton value="Contratar Servico" id="contratarServico" action="menu-solicitar-servico" />
+        <p:commandButton value="Consultar Fatura" id="consultarFatura"  action="visualizacao-fatura" />
 
-        <p:commandButton value="Sair" id="sair" update="sair" actionListener="#{ComumJSFManagedBean.deslogar}" />
+        <p:commandButton value="Sair" id="sair" update="sair" action="index" actionListener="#{EstadiaJSFManagedBean.deslogar}" />
 
     </h:body>
 </html>

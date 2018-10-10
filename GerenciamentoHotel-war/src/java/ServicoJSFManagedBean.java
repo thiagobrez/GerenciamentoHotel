@@ -72,4 +72,5 @@ public class ServicoJSFManagedBean {
     public Servico createServico() {
         return servicoSessionBean.createServico(this.nome, this.descricao, this.valor);
     }
+
 }

@@ -12,28 +12,23 @@
                 <h3> Solicite os serviços que deseja! </h3>
 
                 <h:form>
-                    <p:dataScroller value="#{ServicoJSFManagedBean.servicos}" var="servico" chunkSize="10">
+                    <p:selectOneMenu id="listaServicos" value="#{EstadiaJSFManaged.servico}" lazy="true" style="width:125px">
+                        <f:selectItems value="#{ServicosJSFManaged.servicos}" />
+                    </p:selectOneMenu>
 
-                        <h:panelGrid columns="2" style="width:100%" columnClasses="detail, ">
-                            <h:outputText value="Nome:" />
-                            <h:outputText value="#{servico.nome}" style="font-weight: bold"/>
+                    <p:separator />
 
-                            <h:outputText value="Descricao: " />
-                            <h:outputText value="#{servico.descricao}"/>
+                    <p:commandButton value="Solicitar" oncomplete="PF('dlg').show()" actionListener="#{EstadiaJSFManager.solicitarServico}" />
 
-                            <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="5">
+                    <p:dialog header="Sucesso!" modal="true" showEffect="fade" widgetVar="dlg" resizable="false">
+                        <p:panelGrid columns="1" id="display" columnClasses="label">
+                            <h:outputText value="Servico solicitado com sucesso!" />
+                        </p:panelGrid>
+                    </p:dialog>
 
-                                    <p:commandButton value="Solicitar Servico" id="solicitarServico"
-                                                     actionListener="#{EstadiaJSFManagedBean.solicitarServico(servico)}" />
-
-                                </h:panelGrid>
-                            </p:outputPanel>
-                        </h:panelGrid>
-                    </p:dataScroller>
                 </h:form>
 
-                <p:commandButton value="Voltar" id="voltarMenuHospede" actionListener="#{EstadiaJSFManagedBean.visualizarMenuHospede}" />
+                <p:commandButton value="Voltar" id="voltarMenuHospede" action="usuarioDashboard" />
             </h:panelGrid>
         </p:panel>
     </h:body>
