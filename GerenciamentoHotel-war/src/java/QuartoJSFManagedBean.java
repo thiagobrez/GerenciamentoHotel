@@ -24,14 +24,16 @@ public class QuartoJSFManagedBean {
 
     @EJB
     private QuartoSessionBean quartoSessionBean;
-    private Double numero = new Double(0);
+	
+    private int numero;
     private BigDecimal valorDiaria = new BigDecimal(0);
+	
 
-    public Double getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(Double numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

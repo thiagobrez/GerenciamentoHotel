@@ -71,28 +71,28 @@
             <h:form id="formCadastrarQuarto">
 
                 <h:outputLabel for="numero" value="Numero: " style="font-weight:bold" />
-                <p:inputText id="numero" value="#{QuartoJSFManagedBean.numero}"/>
+                <p:inputText id="numero" value="#{quartoJSFManagedBean.numero}"/>
 
                 <h:outputLabel for="diaria" value="Valor da diaria: " style="font-weight:bold" />
-                <p:inputText id="diaria" value="#{QuartoJFSManagedBean.valorDiaria}" />
+                <p:inputText id="diaria" value="#{quartoJSFManagedBean.valorDiaria}" />
 
                 <p:outputLabel for="tipo" value="Tipo de quarto:" />
                 <p:selectOneMenu id="tipo" style="width:125px">
-                    <f:selectItems value="#{QuartoJFSManagedBean.tipos}" />
+                    <f:selectItems value="#{quartoJSFManagedBean.tipos}" />
                 </p:selectOneMenu>
 
                 <p:outputLabel for="camas" value="Camas: " />
-                <p:selectOneMenu id="camas" >
-                    <f:selectItems value="#{QuartoJFSManagedBean.camas}" />
+                <p:selectOneMenu id="listaCamas" value="#{estadiaJSFManagedBean.cama}" style="width:125px">
+                    <f:selectItems value="#{estadiaJSFManagedBean.listaCamas}" />
                 </p:selectOneMenu>
 
                 <p:outputLabel for="adicionais" value="Adicionais: " />
                 <p:selectOneMenu id="adicionais">
-                    <f:selectItems value="#{QuartoJFSManagedBean.adcionais}" />
+                    <f:selectItems value="#{quartoJSFManagedBean.adicionais}" />
                 </p:selectOneMenu>
 
                 <p:commandButton value="Cadastrar Quarto" id="cadastrarQuarto"
-                                 update="cadastrarQuarto" actionListener="#{QuartoJFSManagedBean.cadastrarQuarto}" />
+                                 update="cadastrarQuarto" actionListener="#{quartoJSFManagedBean.createQuarto}" />
 
             </h:form>
         </h:panelGrid>
