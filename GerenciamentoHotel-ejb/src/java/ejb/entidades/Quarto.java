@@ -66,9 +66,6 @@ public class Quarto implements Serializable {
 	private String ocupado;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "quarto")
 	private Collection<Estadia> estadiaCollection;
-
-	private ArrayList<Cama> camas;
-	private ArrayList<String> adicionais;
 	
 	public Quarto() {
 	}
@@ -94,14 +91,6 @@ public class Quarto implements Serializable {
 		this.valordiaria = valorDiaria;
 		this.tipo = tipo;
 		this.ocupado = ocupado;
-	}
-
-	public ArrayList<Cama> getCamas() {
-		return camas;
-	}
-
-	public ArrayList<String> getAdicionais() {
-		return adicionais;
 	}
 	
 	public Integer getId() {

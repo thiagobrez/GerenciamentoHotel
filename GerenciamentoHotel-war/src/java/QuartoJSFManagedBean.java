@@ -78,8 +78,4 @@ public class QuartoJSFManagedBean {
     public void updateQuarto(Quarto quarto) {
         quartoSessionBean.updateQuarto(quarto);
     }
-
-    public void cadastrarQuarto() {
-        quartoSessionBean.cadastrarQuarto(this.numero, this.valorDiaria,)
-    }
 }

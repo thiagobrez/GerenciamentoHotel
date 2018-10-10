@@ -60,30 +60,13 @@ public class EstadiaSessionBean {
 	
 	public List<Estadia> getEstadias() {
         Query query = em.createNamedQuery("Estadia.findAll");
-		List<Estadia> estadias = query.getResultList();
-		List<EstadiaServicos> estadiaServicos = estadiaServicosSessionBean.getEstadiaServicos();
-		
-		for(Estadia estadia : estadias) {
-			for(EstadiaServicos estadiaServico : estadiaServicos) {
-				if(estadia.getId() == estadiaServico.getEstadiaServicosPK().getIdEstadia())
-					estadia.getServicos().add(servicoSessionBean.findServicoById(estadiaServico.getEstadiaServicosPK().getIdServico()));
-			}
-		}
-		
-		return estadias;
+		return query.getResultList();
     }
 	
 	public Estadia getEstadiaById(int id) {
         Query query = em.createNamedQuery("Estadia.findById");
 		query.setParameter("id", id);
-        Estadia estadia = ((Estadia) query.getResultList().get(0));
-		
-		for(EstadiaServicos estadiaServico : estadiaServicosSessionBean.getEstadiaServicos()) {
-			if(estadia.getId() == estadiaServico.getEstadiaServicosPK().getIdEstadia())
-				estadia.getServicos().add(servicoSessionBean.findServicoById(estadiaServico.getEstadiaServicosPK().getIdServico()));
-		}
-		
-		return estadia;
+        return (Estadia) query.getSingleResult();
 	}
 	
 	public void createEstadia(

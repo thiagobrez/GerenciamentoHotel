@@ -7,7 +7,6 @@ package ejb.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,8 +62,6 @@ public class Estadia implements Serializable {
 	@JoinColumn(name = "USUARIO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
 	private Usuario usuario;
-
-	private ArrayList<Servico> servicos;
 	
 	public Estadia() {
 	}
@@ -93,11 +90,6 @@ public class Estadia implements Serializable {
 		this.fatura = fatura;
 		this.diarias = diarias;
 		this.checkout = checkout;
-		this.servicos = new ArrayList<>();
-	}
-
-	public ArrayList<Servico> getServicos() {
-		return servicos;
 	}
 	
 	public Integer getId() {
