@@ -20,28 +20,56 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class ServicoJSFManagedBean {
 
-	@EJB
-	private ServicoSessionBean servicoSessionBean;
+    @EJB
+    private ServicoSessionBean servicoSessionBean;
 
-	/**
-	 * Creates a new instance of ServicoJSFManagedBean
-	 */
-	public ServicoJSFManagedBean() {
-	}
+    private String nome;
+    private String descricao;
+    private BigDecimal valor = new BigDecimal(0);
 
-	public List<Servico> getServicos() {
-		return servicoSessionBean.getServicos();
-	}
-	
-	public Servico findServicoByNome(String nome) {
-		return servicoSessionBean.findServicoByNome(nome);
-	}
-	
-	public Servico findServicoById(int id) {
-		return servicoSessionBean.findServicoById(id);
-	}
-	
-	public Servico createServico(String nome, String descricao, BigDecimal valor) {
-		return servicoSessionBean.createServico(nome, descricao, valor);
-	}
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
+    /**
+     * Creates a new instance of ServicoJSFManagedBean
+     */
+    public ServicoJSFManagedBean() {
+    }
+
+    public List<Servico> getServicos() {
+        return servicoSessionBean.getServicos();
+    }
+
+    public Servico findServicoByNome(String nome) {
+        return servicoSessionBean.findServicoByNome(nome);
+    }
+
+    public Servico findServicoById(int id) {
+        return servicoSessionBean.findServicoById(id);
+    }
+
+    public Servico createServico() {
+        return servicoSessionBean.createServico(this.nome, this.descricao, this.valor);
+    }
 }

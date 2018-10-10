@@ -22,42 +22,64 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class QuartoJSFManagedBean {
 
-	@EJB
-	private QuartoSessionBean quartoSessionBean;
+    @EJB
+    private QuartoSessionBean quartoSessionBean;
+    private Double numero = new Double(0);
+    private BigDecimal valorDiaria = new BigDecimal(0);
 
-	/**
-	 * Creates a new instance of QuartoJSFManagedBean
-	 */
-	public QuartoJSFManagedBean() {
-	}
-	
-	public List<Quarto> getQuartos() {
-		return quartoSessionBean.getQuartos();
-	}
-	
-	public Quarto getQuartoByNumero(int numero) {
-		return quartoSessionBean.getQuartoByNumero(numero);
-	}
-	
-	public Quarto createQuarto(
-			int numero,
-			BigDecimal valorDiaria,
-			String tipo,
-			String ocupado,
-			ArrayList<Cama> camas,
-			ArrayList<String> adicionais
-	) {
-		return quartoSessionBean.createQuarto(
-				numero, 
-				valorDiaria, 
-				tipo, 
-				ocupado, 
-				camas, 
-				adicionais
-		);
-	}
-	
-	public void updateQuarto(Quarto quarto) {
-		quartoSessionBean.updateQuarto(quarto);
-	}
+    public Double getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Double numero) {
+        this.numero = numero;
+    }
+
+    public BigDecimal getValorDiaria() {
+        return valorDiaria;
+    }
+
+    public void setValorDiaria(BigDecimal valorDiaria) {
+        this.valorDiaria = valorDiaria;
+    }
+
+    /**
+     * Creates a new instance of QuartoJSFManagedBean
+     */
+    public QuartoJSFManagedBean() {
+    }
+
+    public List<Quarto> getQuartos() {
+        return quartoSessionBean.getQuartos();
+    }
+
+    public Quarto getQuartoByNumero(int numero) {
+        return quartoSessionBean.getQuartoByNumero(numero);
+    }
+
+    public Quarto createQuarto(
+            int numero,
+            BigDecimal valorDiaria,
+            String tipo,
+            String ocupado,
+            ArrayList<Cama> camas,
+            ArrayList<String> adicionais
+    ) {
+        return quartoSessionBean.createQuarto(
+                numero,
+                valorDiaria,
+                tipo,
+                ocupado,
+                camas,
+                adicionais
+        );
+    }
+
+    public void updateQuarto(Quarto quarto) {
+        quartoSessionBean.updateQuarto(quarto);
+    }
+
+    public void cadastrarQuarto() {
+        quartoSessionBean.cadastrarQuarto(this.numero, this.valorDiaria,)
+    }
 }

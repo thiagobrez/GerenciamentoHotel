@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
     <h:head>
         <title>Gerenciamento Hotel</title>
     </h:head>
@@ -12,14 +14,14 @@
                 <h:panelGrid columns="1" cellpadding="10">
 
                     <h:outputText value="Login:" />
-                    <p:inputText id="username" value="#{funcionarioJSFManagedBean.username}"/>
+                    <p:inputText id="username" value="#{estadiaJSFManagedBean.username}"/>
 
                     <h:outputText value="Senha:" />
-                    <p:password id="password" value="#{funcionarioJSFManagedBean.senha}"/>
+                    <p:password id="password" value="#{estadiaJSFManagedBean.senha}"/>
 
                     <p:commandButton value="Logar"
                                      id="loginHospedeButton"
-                                     actionListener="#{funcionarioJSFManagedBean.login(username, senha)}" />
+                                     actionListener="#{estadiaJSFManagedBean.login}" />
 
                 </h:panelGrid>
             </p:panel>
