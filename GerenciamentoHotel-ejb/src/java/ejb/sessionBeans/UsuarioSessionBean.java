@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import ejb.entidades.Usuario;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -38,7 +39,11 @@ public class UsuarioSessionBean {
 	public Usuario findUsuarioByCpf(String cpf) {
         Query query = em.createNamedQuery("Usuario.findByCpf");
 		query.setParameter("cpf", cpf);
-        return ((Usuario) query.getResultList().get(0));
+        try {
+			return (Usuario) query.getSingleResult();
+		} catch(NoResultException ex) {
+			return null;
+		}
 	}
 	
 	public Usuario createUsuario(

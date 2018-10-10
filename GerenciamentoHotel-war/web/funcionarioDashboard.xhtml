@@ -31,17 +31,7 @@
         
         <p:panel id="checkinPanel" header="Fazer checkin" style="margin-bottom:20px">
                <h:panelGrid columns="1" cellpadding="10">
-                   <h:form id="formCadastrarQuarto">
-
-<!--                       String nome,
-			String cpf,
-			String endereco,
-			String telefone,
-			Quarto quarto,
-			int senha,
-			int diarias,
-			String status-->
-                       
+                   <h:form id="formCadastrarEstadia">
                        
                        <h:outputLabel for="nome" value="Nome:" style="font-weight:bold" />
                        <p:inputText id="nome" value="#{estadiaJSFManagedBean.novoNome}"/>
@@ -67,7 +57,7 @@
                        <h:outputLabel for="status" value="Status:" style="font-weight:bold" />
                        <p:inputText id="status" value="#{estadiaJSFManagedBean.novoStatus}"/>
                        
-                       <p:commandButton value="Cadastrar Estadia" id="cadastrarQuarto"
+                       <p:commandButton value="Cadastrar Estadia" id="cadastrarEstadia"
                                         update="cadastrarEstadia" actionListener="#{estadiaJSFManagedBean.createEstadia}" />
 
                    </h:form>
