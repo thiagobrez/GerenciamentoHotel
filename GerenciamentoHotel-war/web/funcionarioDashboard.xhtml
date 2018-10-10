@@ -72,7 +72,6 @@
                         <p:inputText id="telefoneHospede" value="#{EstadiaJSFManagedBean.telefone}"/>
 
                         <p:commandButton value="Realizar Checkin" id="realizarCheckin"
-                                         <!-- update="realizarCheckin" -->
                                          actionListener="#{EstadiaJSFManagedBean.realizarCheckin}" />
 
                 </p:panelGrid>
@@ -127,10 +126,10 @@
             <h:form id="formCadastrarQuarto">
 
                 <h:outputLabel for="numero" value="Numero: " style="font-weight:bold" />
-                <p:inputNumber id="numero" value="#{QuartoJSFManagedBean.numero}"/>
+                <p:inputText id="numero" value="#{QuartoJSFManagedBean.numero}"/>
 
                 <h:outputLabel for="diaria" value="Valor da diaria: " style="font-weight:bold" />
-                <p:inputNumber id="diaria" value="#{QuartoJFSManagedBean.valorDiaria}" decimalPlates="2"/>
+                <p:inputText id="diaria" value="#{QuartoJFSManagedBean.valorDiaria}" />
 
                 <p:outputLabel for="tipo" value="Tipo de quarto:" />
                 <p:selectOneMenu id="tipo" style="width:125px">
@@ -166,9 +165,9 @@
                 <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4" value="#{servicoJSFManagedBean.descricao}"/>
 
                 <h:outputLabel for="valor" value="Valor: " style="font-weight:bold" />
-                <p:inputNumber id="valor" value="#{servicoJSFManagedBean.valor}" decimalPlates="2" />
+                <p:inputText id="valor" value="#{servicoJSFManagedBean.valor}"/>
 
-                <p:commandButton value="Cadastrar Servico" id="cadastrarServicp"
+                <p:commandButton value="Cadastrar Servico" id="cadastrarServico"
                                  update="cadastrarServico" actionListener="#{ServicoJSFManagedBean.cadastrarServico}" />
 
             </h:form>

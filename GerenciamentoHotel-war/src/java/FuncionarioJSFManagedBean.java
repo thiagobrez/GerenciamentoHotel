@@ -47,8 +47,14 @@ public class FuncionarioJSFManagedBean {
 		this.senha = senha;
 	}
 	
-	public Funcionario login(int username, int senha) {
-		return funcionarioSessionBean.login(username, senha);
+	public String login() {
+		Funcionario funcionario = funcionarioSessionBean.login(this.username, this.senha);
+		if(funcionario != null) {
+			return "funcionarioDashboard?faces-redirect=true";
+		} else {
+			
+		}
+		return "index";
 	}
 
 	public List<Funcionario> getFuncionarios() {

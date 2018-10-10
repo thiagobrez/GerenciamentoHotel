@@ -28,7 +28,7 @@ public class FuncionarioSessionBean {
 		em.persist(object);
 	}
 
-	public Funcionario login(int username, int senha) {
+	public Funcionario login(String username, String senha) {
 		List<Funcionario> funcionarios = getFuncionarios();
 		for(Funcionario funcionario : funcionarios) {
 			if(funcionario.getUsername().equals(username) &&
