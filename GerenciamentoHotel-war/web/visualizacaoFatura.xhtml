@@ -7,14 +7,16 @@
         <title>Hotel Control</title>
     </h:head>
     <h:body>
-        <p:panel header="Fatura" style="text-align:center">
-            <h:panelGrid columns="1" style="width:100%">
+        <h:form>
+            <p:panel header="Fatura" style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
 
-                <h3> Sua fatura até o momento é de #{EstadiaJSFManagedBean.fatura} </h3>
-                <p:commandButton value="Voltar" id="voltarMenuHospede" action="usuarioDashboard" />
+                    <h3> Sua fatura até o momento é de #{estadiaJSFManagedBean.fatura} </h3>
+                    <p:commandButton value="Voltar" id="voltarMenuHospedeButton" action="usuarioDashboard" />
 
-            </h:panelGrid>
-        </p:panel>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
 
     </h:body>
 </html>

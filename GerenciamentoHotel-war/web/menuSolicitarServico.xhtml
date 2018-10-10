@@ -5,21 +5,21 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Hotel Control</title>
     </h:head>
     <h:body>
-        <p:panel header="" style="text-align:center">
-            <h:panelGrid columns="1" style="width:100%">
-                <h3> Solicite os serviços que deseja! </h3>
+        <h:form>
+            <p:panel header="" style="text-align:center">
+                <h:panelGrid columns="1" style="width:100%">
+                    <h3> Solicite os serviços que deseja! </h3>
 
-                <h:form>
-                    <p:selectOneMenu id="listaServicos" value="#{EstadiaJSFManaged.servico}" style="width:125px">
-                        <f:selectItems value="#{ServicosJSFManaged.servicos}" />
+                    <p:selectOneMenu id="listaServicos" value="#{estadiaJSFManagedBean.servico}" style="width:125px">
+                        <f:selectItems value="#{servicoJSFManagedBean.servicos}" />
                     </p:selectOneMenu>
 
                     <p:separator />
 
-                    <p:commandButton value="Solicitar" oncomplete="PF('dlg').show()" actionListener="#{EstadiaJSFManager.solicitarServico}" />
+                    <p:commandButton value="Solicitar" oncomplete="PF('dlg').show()" actionListener="#{estadiaJSFManagedBean.solicitarServico}" />
 
                     <p:dialog header="Sucesso!" modal="true" showEffect="fade" widgetVar="dlg" resizable="false">
                         <p:panelGrid columns="1" id="display" columnClasses="label">
@@ -27,11 +27,10 @@
                         </p:panelGrid>
                     </p:dialog>
 
-                </h:form>
-
-                <p:commandButton value="Voltar" id="voltarMenuHospede" action="usuarioDashboard" />
-            </h:panelGrid>
-        </p:panel>
+                    <p:commandButton value="Voltar" id="voltarDashboardHospedeButton" action="usuarioDashboard" />
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
 

@@ -9,6 +9,7 @@ import ejb.entidades.Quarto;
 import ejb.entidades.Servico;
 import ejb.sessionBeans.EstadiaSessionBean;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,87 +29,88 @@ public class EstadiaJSFManagedBean {
 
     private int numeroQuarto;
     private int senha;
+    private Estadia estadia;
     private Quarto selectedQuarto;
     private String nome;
     private String cpf;
     private String endereco;
     private String telefone;
-    private String fatura;
+    private BigDecimal fatura = new BigDecimal(0);
     private Servico servico;
 
-	private String novoNome;
-	private String novoCpf;
-	private String novoEndereco;
-	private String novoTelefone;
-	private int novaDiarias;
-	private int novaSenha;
-	private String novoStatus;
-	private int novoQuarto;
+    private String novoNome;
+    private String novoCpf;
+    private String novoEndereco;
+    private String novoTelefone;
+    private int novaDiarias;
+    private int novaSenha;
+    private String novoStatus;
+    private int novoQuarto;
 
-	public int getNovoQuarto() {
-		return novoQuarto;
-	}
+    public int getNovoQuarto() {
+        return novoQuarto;
+    }
 
-	public void setNovoQuarto(int novoQuarto) {
-		this.novoQuarto = novoQuarto;
-	}
+    public void setNovoQuarto(int novoQuarto) {
+        this.novoQuarto = novoQuarto;
+    }
 
-	public String getNovoNome() {
-		return novoNome;
-	}
+    public String getNovoNome() {
+        return novoNome;
+    }
 
-	public void setNovoNome(String novoNome) {
-		this.novoNome = novoNome;
-	}
+    public void setNovoNome(String novoNome) {
+        this.novoNome = novoNome;
+    }
 
-	public String getNovoCpf() {
-		return novoCpf;
-	}
+    public String getNovoCpf() {
+        return novoCpf;
+    }
 
-	public void setNovoCpf(String novoCpf) {
-		this.novoCpf = novoCpf;
-	}
+    public void setNovoCpf(String novoCpf) {
+        this.novoCpf = novoCpf;
+    }
 
-	public String getNovoEndereco() {
-		return novoEndereco;
-	}
+    public String getNovoEndereco() {
+        return novoEndereco;
+    }
 
-	public void setNovoEndereco(String novoEndereco) {
-		this.novoEndereco = novoEndereco;
-	}
+    public void setNovoEndereco(String novoEndereco) {
+        this.novoEndereco = novoEndereco;
+    }
 
-	public String getNovoTelefone() {
-		return novoTelefone;
-	}
+    public String getNovoTelefone() {
+        return novoTelefone;
+    }
 
-	public void setNovoTelefone(String novoTelefone) {
-		this.novoTelefone = novoTelefone;
-	}
+    public void setNovoTelefone(String novoTelefone) {
+        this.novoTelefone = novoTelefone;
+    }
 
-	public int getNovaDiarias() {
-		return novaDiarias;
-	}
+    public int getNovaDiarias() {
+        return novaDiarias;
+    }
 
-	public void setNovaDiarias(int novaDiarias) {
-		this.novaDiarias = novaDiarias;
-	}
+    public void setNovaDiarias(int novaDiarias) {
+        this.novaDiarias = novaDiarias;
+    }
 
-	public int getNovaSenha() {
-		return novaSenha;
-	}
+    public int getNovaSenha() {
+        return novaSenha;
+    }
 
-	public void setNovaSenha(int novaSenha) {
-		this.novaSenha = novaSenha;
-	}
+    public void setNovaSenha(int novaSenha) {
+        this.novaSenha = novaSenha;
+    }
 
-	public String getNovoStatus() {
-		return novoStatus;
-	}
+    public String getNovoStatus() {
+        return novoStatus;
+    }
 
-	public void setNovoStatus(String novoStatus) {
-		this.novoStatus = novoStatus;
-	}
-	
+    public void setNovoStatus(String novoStatus) {
+        this.novoStatus = novoStatus;
+    }
+
     /**
      * Creates a new instance of EstadiaJSFManagedBean
      */
@@ -123,11 +125,11 @@ public class EstadiaJSFManagedBean {
         this.numeroQuarto = numeroQuarto;
     }
 
-    public String getFatura() {
+    public BigDecimal getFatura() {
         return fatura;
     }
 
-    public void setFatura(String fatura) {
+    public void setFatura(BigDecimal fatura) {
         this.fatura = fatura;
     }
 
@@ -209,29 +211,34 @@ public class EstadiaJSFManagedBean {
     }
 
     public String solicitarServico() {
-		return "menuSolicitarServico?faces-redirect=true";
+        return "menuSolicitarServico?faces-redirect=true";
 //        estadiaSessionBean.solicitarServico(this.numeroQuarto, this.servico);
     }
 
     public String login() throws IOException {
-        Estadia estadia = estadiaSessionBean.login(this.numeroQuarto, this.senha);
-		if(estadia != null) {
-			   return "usuarioDashboard?faces-redirect=true";
+        this.estadia = estadiaSessionBean.login(this.numeroQuarto, this.senha);
+        if (estadia != null) {
+            this.nome = this.estadia.getUsuario().getNome();
+            this.cpf = this.estadia.getUsuario().getCpf();
+            this.endereco = this.estadia.getUsuario().getEndereco();
+            this.fatura = this.estadia.getFatura();
+
+            return "usuarioDashboard?faces-redirect=true";
 //			FacesContext.getCurrentInstance().getExternalContext().redirect("usuarioDashboard.xhtml");
-		} else {
-			
-		}
-		return "index";
+        } else {
+
+        }
+        return "index";
     }
 
     public void deslogar() {
         this.numeroQuarto = 0;
         this.senha = 0;
         this.selectedQuarto = null;
-		this.nome = "";
+        this.nome = "";
         this.cpf = "";
         this.endereco = "";
-        this.fatura = "";
+        this.fatura = new BigDecimal(0);
         this.telefone = "";
     }
 
