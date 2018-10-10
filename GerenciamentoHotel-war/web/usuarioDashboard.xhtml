@@ -4,134 +4,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
+    <h:head>
         <title>Hotel Control</title>
     </h:head>
     <h:body>
 
-        <!--layout="grid"-->
-        
-        <p:dataGrid var="quarto" value="#{algumaClasse.getQuartos}" columns="3"
-                    rows="6" paginator="true" id="quartos"
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    rowsPerPageTemplate="6">
+        <p:commandButton value="Contratar Servico" id="contratarServico"  actionListener="#{EstadiaJSFManagedBean.visualizarSolicitarServico}" />
+        <p:commandButton value="Solicitar Limpeza" id="solicitarLimpeza" actionListener="#{EstadiaJSFManagedBean.solicitarLimpeza}" />
+        <p:commandButton value="Consultar Fatura" id="consultarFatura"  actionListener="#{EstadiaJSFManagedBean.vizualizarFatura}" />
 
-            <f:facet name="header">
-                Quartos cadastrados
-            </f:facet>
-
-            <p:panel header="#{algumaClasse.getNumeroQuarto}" style="text-align:center">
-                <h:panelGrid columns="1" style="width:100%">
-
-                    <h:outputText value="#{algumaClasse.getQuartoOcupado}" />
-
-                    <p:commandLink update=":form:checkin" oncomplete="PF('checkinDialog').show()" title="Checkin">
-                        <f:setPropertyActionListener value="#{quarto}" target="#{algumaClasse.selectedQuarto}" />
-                    </p:commandLink>
-
-                    <p:commandLink update=":form:checkout" oncomplete="PF('checkoutDialog').show()" title="Checkout">
-                        <f:setPropertyActionListener value="#{quarto}" target="#{algumaClasse.selectedQuarto}" />
-                    </p:commandLink>
-
-                </h:panelGrid>
-            </p:panel>
-        </p:dataGrid>
-
-        <p:dialog header="Checkin" widgetVar="checkinDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-            <h:form>
-                <p:outputPanel id="checkin" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty algumaClasse.selectedQuarto}" columnClasses="label,value">
-
-                        <h:outputText value="Nome: " />
-                        <p:inputText id="nome" />
-
-                        <h:outputText value="CPF: " />
-                        <p:inputText id="cpf" />
-
-                        <h:outputText value="EndereÁo: " />
-                        <p:inputText id="endereco" />
-
-                        <h:outputText value="Telefone: " />
-                        <p:inputText id="telefone" />
-
-                        <p:commandButton value="Realizar Checkin" id="realizarCheckin" update="realizarCheckin" actionListener="#{algumaClasse.realizarCheckin}" />
-
-                        <p:commandButton value="Cancelar" id="cancelar" update="cancelar" />
-
-
-                    </p:panelGrid>
-                </p:outputPanel>
-            </h:form>
-        </p:dialog>
-
-        <p:dialog header="Checkout" widgetVar="checkoutDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-            <p:outputPanel id="checkout" style="text-align:center;">
-                <p:panelGrid  columns="1" rendered="#{not empty algumaClasse.selectedQuarto}" columnClasses="label">
-
-                    <h:outputText value="Fatura ser· fechada no valor de " />
-                    <p:inputText id="fatura" value="#(algumaClasse.fatura)"/>
-
-                    <p:commandButton value="Realizar Checkout" id="realizarCheckout" update="realizarCheckout" actionListener="#{algumaClasse.realizarCheckout}" />
-
-                    <p:commandButton value="Cancelar" id="cancelar" update="cancelar" />
-
-                </p:panelGrid>
-            </p:outputPanel>
-        </p:dialog>
-
-
-        <p:panel id="cadastrarQuarto" header="Cadastrar Quarto" style="margin-bottom:20px">
-            <h:panelGrid columns="1" cellpadding="10">
-                <h:form id="formQuarto">
-
-                    <h:outputLabel for="numero" value="N˙mero: " style="font-weight:bold" />
-                    <p:inputText id="numero" />
-
-                    <h:outputLabel for="diaria" value="Valor da di·ria: " style="font-weight:bold" />
-                    <p:inputText id="diaria" />
-
-                    <p:outputLabel for="tipo" value="Tipo de quarto:" />
-                    <p:selectOneMenu id="tipo" style="width:125px">
-                        <f:selectItems value="#{algumaClase.getTipos}" />
-                    </p:selectOneMenu>
-
-                    <p:outputLabel for="camas" value="Camas: " />
-                    <p:selectOneMenu id="camas" >
-                        <f:selectItems value="#{algumaClasse.getCamas}" />
-                    </p:selectOneMenu>
-
-                    <p:outputLabel for="adicionais" value="Adicionais: " />
-                    <p:selectOneMenu id="adicionais">
-                        <f:selectItems value="#{algumaClasse.getAdcionais}" />
-                    </p:selectOneMenu>
-
-                    <p:commandButton value="Cadastrar Quarto" id="cadastrarQuarto" update="cadastrarQuarto" actionListener="#{algumaClasse.cadastrarQuarto}" />
-
-                </h:form>
-            </h:panelGrid>
-        </p:panel>
-
-        <p:panel id="cadastrarServico" header="Cadastrar ServiÁos" style="margin-bottom:20px">
-            <h:panelGrid columns="1" cellpadding="10">
-
-                <h:form id="formServico">
-
-                    <h:outputLabel for="nome" value="Nome do serviÁo: " style="font-weight:bold" />
-                    <p:inputText id="nome" />
-
-                    <h3 style="margin-top: 0">DescriÁ„o</h3>
-                    <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4" />
-
-                    <h:outputLabel for="valor" value="Valor: " style="font-weight:bold" />
-                    <p:inputText id="valor" />
-
-                    <p:commandButton value="Cadastrar ServiÁo" id="cadastrarServicp" update="cadastrarServicp" actionListener="#{algumaClasse.cadastrarServicp}" />
-
-                </h:form>
-            </h:panelGrid>
-        </p:panel>
-
-        <p:commandButton value="Sair" id="sair" update="sair" actionListener="#{algumaClasse.deslogar}" />
+        <p:commandButton value="Sair" id="sair" update="sair" actionListener="#{ComumJSFManagedBean.deslogar}" />
 
     </h:body>
 </html>
