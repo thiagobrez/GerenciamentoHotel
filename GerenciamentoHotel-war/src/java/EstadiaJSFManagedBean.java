@@ -10,11 +10,11 @@ import ejb.entidades.Servico;
 import ejb.sessionBeans.EstadiaSessionBean;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -23,7 +23,6 @@ import javax.faces.context.FacesContext;
 @Named(value = "estadiaJSFManagedBean")
 @RequestScoped
 public class EstadiaJSFManagedBean {
-
     @EJB
     private EstadiaSessionBean estadiaSessionBean;
 
@@ -46,7 +45,13 @@ public class EstadiaJSFManagedBean {
     private int novaSenha;
     private String novoStatus;
     private int novoQuarto;
+	
+	private ArrayList<String> listaStatus;
 
+	public ArrayList<String> getListaStatus() {
+		return listaStatus;
+	}
+	
     public int getNovoQuarto() {
         return novoQuarto;
     }
@@ -115,6 +120,9 @@ public class EstadiaJSFManagedBean {
      * Creates a new instance of EstadiaJSFManagedBean
      */
     public EstadiaJSFManagedBean() {
+		this.listaStatus = new ArrayList<>();
+		this.listaStatus.add("reservado");
+		this.listaStatus.add("ocupado");
     }
 
     public int getNumeroQuarto() {
